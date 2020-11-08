@@ -2,15 +2,18 @@ const wyr = require("../../wyr.json");
 const Discord = require("discord.js");
 require('dotenv').config();
 const { getRandomQuestion } = require('../../database.js');
+const DB = require('../../database.js');
+const JSON = require('../../questions.json');
 
 module.exports.run = async (client, message) => {
-    const randomQuestion = await getRandomQuestion()
-    .then(randomQuestion => { return randomQuestion})
-    .catch(err => console.log(err));
+    var max = Object.keys(JSON).length;
+    var number = Math.floor(Math.random() * Math.floor(max)) + 1;
+    console.log(number);
+    console.log(JSON[number]);
 
     const embed = new Discord.MessageEmbed()
             .setColor("#1E90FF")
-            .addField("Would you rather", `${randomQuestion.question}`);
+            .addField("Would you rather", `${JSON[number].question}`);
 
 
     message.channel.send(embed)

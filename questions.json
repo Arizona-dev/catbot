@@ -1,0 +1,20 @@
+{
+    "1":{
+        "question" : "Cat or dog ?"
+    },
+    "2":{
+        "question" : "Banana or peach ?"
+    },
+    "3":{
+        "question" : "Mac or Windows ?"
+    },
+    "4":{
+        "question" : "Paris or NYC ?"
+    },
+    "5":{
+        "question" : "Beach or mountain ?"
+    },
+    "6":{
+        "question" : "Coca or Ice tea ?"
+    }
+}
