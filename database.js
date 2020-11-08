@@ -14,6 +14,7 @@ const getRandomQuestion = async () => {
         const r = Math.floor(Math.random() * n );
         const query = { question_id: r };
         randomQuestion = await collection.findOne(query);
+        console.log(`Question : ${randomQuestion}`);
         await db_client.close();
         })
         .catch(err => console.log(err));
