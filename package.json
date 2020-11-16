@@ -1,20 +1,20 @@
 {
-  "name": "catbot",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "dependencies": {
-    "discord.js": "^12.4.0",
-    "dotenv": "^8.2.0",
-    "fs": "0.0.1-security",
-    "mongodb": "^3.6.2",
-    "nodemon": "^2.0.6"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+    "name": "catbot",
+    "version": "1.1.0",
+    "description": "",
+    "main": "app.js",
+    "dependencies": {
+        "discord.js": "^12.4.0",
+        "dotenv": "^8.2.0",
+        "fs": "0.0.1-security",
+        "mongodb": "^3.6.2",
+        "nodemon": "^2.0.6"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "start": "nodemon app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Arizona",
+    "license": "ISC"
 }

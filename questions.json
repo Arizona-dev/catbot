@@ -1,20 +1,44 @@
 {
-    "1":{
-        "question" : "Cat or dog ?"
+    "1": {
+        "question": "Cat or dog ?",
+        "answers": [
+            5,
+            4
+        ]
     },
-    "2":{
-        "question" : "Banana or peach ?"
+    "2": {
+        "question": "Banana or peach ?",
+        "answers": [
+            0,
+            0
+        ]
     },
-    "3":{
-        "question" : "Mac or Windows ?"
+    "3": {
+        "question": "Mac or Windows ?",
+        "answers": [
+            0,
+            0
+        ]
     },
-    "4":{
-        "question" : "Paris or NYC ?"
+    "4": {
+        "question": "Paris or NYC ?",
+        "answers": [
+            0,
+            0
+        ]
     },
-    "5":{
-        "question" : "Beach or mountain ?"
+    "5": {
+        "question": "Beach or mountain ?",
+        "answers": [
+            0,
+            0
+        ]
     },
-    "6":{
-        "question" : "Coca or Ice tea ?"
+    "6": {
+        "question": "Coca or Ice tea ?",
+        "answers": [
+            0,
+            0
+        ]
     }
 }

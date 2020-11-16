@@ -1,32 +1,37 @@
-const wyr = require("../../wyr.json");
 const Discord = require("discord.js");
 require('dotenv').config();
-const { getRandomQuestion } = require('../../database.js');
-const DB = require('../../database.js');
-const JSON = require('../../questions.json');
+const Questions = require('../../questions.json');
+const fs = require('fs');
+const path = require('path');
 
 module.exports.run = async (client, message) => {
     var max = Object.keys(JSON).length;
     var number = Math.floor(Math.random() * Math.floor(max)) + 1;
-    console.log(number);
-    console.log(JSON[number]);
+
+    let rawdata = fs.readFileSync(path.resolve('./', 'questions.json'));
+    let question = JSON.parse(rawdata);
 
     const embed = new Discord.MessageEmbed()
             .setColor("#1E90FF")
-            .addField("Would you rather", `${JSON[number].question}`);
-
+            .addField("Would you rather", `${Questions[number].question}`);
 
     message.channel.send(embed)
     .then(async (msg) => {
-        for (emoji of ['✅', '❌']) await msg.react(emoji);
-        msg.awaitReactions((reaction) => (reaction.emoji.name == "✅" || reaction.emoji.name == "❌"),
+        for (emoji of ['🅰', '🅱']) await msg.react(emoji);
+        msg.awaitReactions((reaction) => (reaction.emoji.name == "🅰" || reaction.emoji.name == "🅱"),
             { max: 1, time: 10000, errors: ['time'] })
         .then(collected => {
-            if (collected.first().emoji.name == "✅") {
-                message.reply(`You reacted with ${collected.first().emoji.name}`)
+            let A = Questions[number].answers[0];
+            let B = Questions[number].answers[1];
+            if (collected.first().emoji.name == '🅰') {
+                question[number].answers[0]++;
+                A = A+1;
             } else {
-                message.reply(`You reacted with ${collected.first().emoji.name}`)
+                question[number].answers[1]++;
+                B = B+1;
             }
+            fs.writeFileSync(path.resolve('./', 'questions.json'), JSON.stringify(question, null, 4));
+            message.reply(`${A} voted 🅰 and ${B} voted 🅱`);
         })
         .catch(() => {
             return message.reply("Pas de réponse, Question annulé");
