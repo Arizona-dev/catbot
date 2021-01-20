@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js');
+//const firstMessage = require('./firstMessage.js');
 
-module.exports = (client, member) => {
+module.exports = (client) => {
   const embed = new MessageEmbed()
     .setAuthor(`${member.displayName} (${member.id})`, member.user.displayAvatarURL())
     .setColor("red")

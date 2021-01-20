@@ -1,3 +1,3 @@
 module.exports = client => {
-    client.user.setPresence({ activity: { name: 'to all your requests', type: 'LISTENING' } })
+    client.user.setPresence({ activity: { name: 'toutes vos requêtes', type: 'LISTENING' } })
 }
