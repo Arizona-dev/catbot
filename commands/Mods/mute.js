@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args) => {
         muterole = await message.guild.roles.create({
             data: {
                 name: 'Muted',
-                color: '#000',
+                color: '#FF000',
                 permissions: []
             }
         });
@@ -35,8 +35,8 @@ module.exports.help = {
     name: "mute",
     aliases: ['mute'],
     category: 'mods',
-    description: "Mutes a user",
-    cooldown: 10,
+    description: "Mute un utilisateur",
+    cooldown: 0,
     usage: '<@mention> <time>',
     permissions: true,
     isUserAdmin: true,

@@ -1,6 +1,6 @@
 module.exports.run = async (client, message, args) => {
     if (isNaN(args[0]) || args[0] < 1 || args[0] > 100)
-        return message.reply('choose a number between 1 and 100');
+        return message.reply('Entrer un nombre entre 1 and 100');
 
     const messages = await message.channel.messages.fetch({
         limit: Math.min(args[0], 100),
@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args) => {
 
     await message.channel.bulkDelete(messages);
 
-    const msg = await message.channel.send(`${args[0]} messages has been deleted.`);
+    const msg = await message.channel.send(`${args[0]} messages ont été supprimés.`);
 
     setTimeout(() => {
         message.delete();
@@ -21,8 +21,8 @@ module.exports.help = {
     name: "clean",
     aliases: ['clear'],
     category: 'mods',
-    description: "Cleans a set number of messages, between 1 and 100",
-    cooldown: 10,
+    description: "Clean les messages, entre 1 et 100",
+    cooldown: 0,
     usage: '<nb_message>',
     permissions: true,
     isUserAdmin: false,
