@@ -20,12 +20,11 @@ module.exports = async (client, id, text, reactions = []) => {
                 // Edit the messages
                 for (const message of messages) {
                     message[1].edit(text);
-                    console.log(message[1], reactions);
                     addReactions(message[1], reactions);
                 }
             }
         });
     } catch (error) {
-        console.log(error, 'okkokoko');
+        // console.log(error, 'okkokoko');
     }
 }

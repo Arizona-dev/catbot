@@ -6,15 +6,15 @@ const List = fs.readdirSync('./commands');
 module.exports.run = (client, message, args) => {
     if (!args.length) {
         const embed = new Discord.MessageEmbed()
-            .setTitle("Help")
+            .setTitle("Delamain")
             .setColor("#1E90FF")
-            .addField("Liste des commandes", `Les commandes sous classé par sous-catégories\nEcrivez \`${config.PREFIX}help <command/alias>\` pour avoir plus d'infos.`)
+            .addField("Pour vous servir", `Les commandes sont classé par sous-catégories.\nEcrivez \`${config.PREFIX}help <command/alias>\` pour avoir plus d'infos.`, true)
 
         for (const category of List) {
             embed.addField(
                 `${category}`,
                 `${client.commands.filter(cat => cat.help.category === category.toLowerCase())
-                    .map(cmd => cmd.help.name).join(", ")}`
+                .map(cmd => cmd.help.name).join(", ")}`
             )
         }
 

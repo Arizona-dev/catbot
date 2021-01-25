@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "clean",
-    aliases: ['clear'],
+    aliases: ['clear', 'c'],
     category: 'mods',
     description: "Clean les messages, entre 1 et 100",
     cooldown: 0,

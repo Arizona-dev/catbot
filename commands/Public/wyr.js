@@ -43,7 +43,7 @@ module.exports.help = {
     name: "wyr",  // nom du fichier
     aliases: ['wyr'], // alias ou nom du fichier si pas d'alias
     category: 'public', // nom du dossier 
-    description: "Would you rather", // une description
+    description: "Est-ce que tu préfère :", // une description
     cooldown: 0, // un cd entre 2 fois la meme commande
     usage: '', // si y a des arguments obligatoire
     permissions: false, // permissions de la personne qui fait la commande
