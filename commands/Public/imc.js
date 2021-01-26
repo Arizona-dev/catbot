@@ -7,7 +7,7 @@ module.exports.run = (client, message, args) => {
     .setColor("#1E90FF")
     .addField("Pour calculer votre IMC", `Entrez votre taille en Centimètre ainsi que votre poids en Kg\nEcrivez \`${config.PREFIX}imc <taille en cm> <poids en kg>`)
     .addField("Taille", `Entrez votre taille en Centimètre: entre 100 Cm et 220 Cm`)
-    .addField("Taille", `Entrez votre poids en Kilogrammes: entre 30 Kg et 300 Kg`);
+    .addField("Poids", `Entrez votre poids en Kilogrammes: entre 30 Kg et 300 Kg`);
 
     if (!args.length) {
       return message.channel.send(defaultEmbed);

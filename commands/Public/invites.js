@@ -37,7 +37,7 @@ module.exports.help = {
   category: 'public', // nom du dossier 
   description: "Affiche le nombre d\'invitations par membres.", // une description
   cooldown: 0, // un cd entre 2 fois la meme commande
-  usage: '', // si y a des arguments obligatoire
+  usage: '<command_name>', // si y a des arguments obligatoire
   permissions: false, // permissions de la personne qui fait la commande
   isUserAdmin: false, // args doit etre une mention et la personne mentionné n'est pas administrator
   args: false // besoin d'args

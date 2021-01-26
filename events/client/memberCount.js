@@ -5,7 +5,6 @@ module.exports = (client) => {
     const channel = guild.channels.cache.get(channelId);
     channel.setName(`Membres: ${guild.memberCount.toLocaleString()}`);
   }
-
   client.on('guildMemberAdd', (member) => updateMembers(member.guild));
   client.on('guildMemberRemove', (member) => updateMembers(member.guild));
 

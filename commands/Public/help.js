@@ -8,17 +8,16 @@ module.exports.run = (client, message, args) => {
         const embed = new Discord.MessageEmbed()
             .setTitle("Delamain")
             .setColor("#1E90FF")
-            .addField("Pour vous servir", `Les commandes sont classé par sous-catégories.\nEcrivez \`${config.PREFIX}help <command/alias>\` pour avoir plus d'infos.`, true)
+            .addField("Pour vous servir", `Les commandes sont classé par sous-catégories.\nEcrivez \`${config.PREFIX}help <command/alias>\` pour avoir plus d'infos.`)
 
-        for (const category of List) {
-            embed.addField(
-                `${category}`,
+            for (const category of List) {
+                embed.addField(`${category}`,
                 `${client.commands.filter(cat => cat.help.category === category.toLowerCase())
-                .map(cmd => cmd.help.name).join(", ")}`
-            )
-        }
-
+                    .map(cmd => cmd.help.name).join(", ")}`, true
+                );
+            }
         return message.channel.send(embed);
+
     } else {
         const command = client.commands.get(args.join(" "))
             || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(args.join(" ")));
@@ -28,7 +27,7 @@ module.exports.run = (client, message, args) => {
         //       .setTitle(`Command : ${args.join(" ")}`)
         //       .setColor("#1E90FF")
         //       .setDescription(`Yo what command are you searching?`);
-      
+
         //     return message.channel.send(errorNotFound);
         // }
         
