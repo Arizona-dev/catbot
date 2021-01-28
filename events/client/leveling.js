@@ -4,11 +4,14 @@ const profileSchema = require('../../schemas/profileSchema');
 module.exports = (client) => {
   client.on('message', (message) => {
     const { guild, member } = message;
-    if (member.user.bot) {
+    if (member && member.user && member.user.bot) {
       return
     }
-    
-    addXP(guild.id, member.id, Math.random() * 3, message);
+    if (member && member.user) {
+      addXP(guild.id, member.id, Math.random() * 3, message);
+    } else {
+      return
+    }
   })
 }
 

@@ -46,9 +46,27 @@ class PlayAudioCommand extends Commando.Command {
         connection.play(path.join(directory, 'kouisine.mp3'));
       });
     } else if (args[0] === 'humiliation') {
-      sound(message, 'humiliation.mp3');
+      voice.channel.join().then((connection) => {
+        connection.play(path.join(directory, 'humiliation.mp3'));
+      });
+    } else if (args[0] === 'frappe') {
+      voice.channel.join().then((connection) => {
+        connection.play(path.join(directory, 'frappemoi.mp3'));
+      });
+    } else if (args[0] === 'soucis') {
+      voice.channel.join().then((connection) => {
+        connection.play(path.join(directory, 'soucis.mp3'));
+      });
+    } else if (args[0] === 'ok') {
+      voice.channel.join().then((connection) => {
+        connection.play(path.join(directory, 'okay.mp3'));
+      });
+    } else if (args[0] === 'front') {
+      voice.channel.join().then((connection) => {
+        connection.play(path.join(directory, 'sensibilite.mp3'));
+      });
     } else {
-      message.reply('zebi - kouisine - ps4 - ntm - humiliation - respect');
+      message.reply('zebi - kouisine - ps4 - ntm - humiliation - respect- frappe - soucis - ok - front');
     }
   }
 }

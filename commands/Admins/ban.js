@@ -1,8 +1,14 @@
 const Discord = require('discord.js');
 module.exports.run = async (client, message, args) => {
     let user = message.mentions.users.first();
-    let days = args.splice(1, 1);
-    const reason = args.splice(1).join(' ');
+    let days = 0;
+    const reason = args.splice(2, 1).join(' ');
+
+    if (args.splice(1, 1) === NaN) {
+        return days;
+    } else {
+        days = args.splice(1, 1);
+    }
 
     user = user.toString();
     if (user.includes("!")) {
@@ -27,10 +33,10 @@ module.exports.run = async (client, message, args) => {
     });
 
     await message.channel.bulkDelete(messages);
-    // user ? message.guild.member(user).ban({
-    //     days: (Number.isInteger(Number.parseInt(days)) ? days : 0),
-    //     reason
-    // }) : message.channel.send("Cet utilisateur n'existe pas.");
+    user ? message.guild.member(user).ban({
+        days: (Number.isInteger(Number.parseInt(days)) ? days : 0),
+        reason
+    }) : message.channel.send("Cet utilisateur n'existe pas.");
     await message.channel.send(banEmbed);
 
 };

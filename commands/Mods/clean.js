@@ -1,7 +1,8 @@
 module.exports.run = async (client, message, args) => {
-    if (isNaN(args[0]) || args[0] < 1 || args[0] > 100)
-        return message.reply('Entrer un nombre entre 1 and 100');
+    if (isNaN(args[0]) || args[0] < 1 || args[0] > 500)
+        return message.reply('Entrer un nombre entre 1 and 500');
 
+    const toDelete = (args[0] <= 100 ? args[0] : args[0] / 100);
     const messages = await message.channel.messages.fetch({
         limit: Math.min(args[0], 100),
         before: message.id
@@ -11,10 +12,22 @@ module.exports.run = async (client, message, args) => {
 
     const msg = await message.channel.send(`${args[0]} messages ont été supprimés.`);
 
-    setTimeout(() => {
-        message.delete();
-        msg.delete();
-    }, 2000);
+    if (args[0] > 100) {
+        let nb = toDelete * 100;
+        for (const i = 0; nb > i; nb--) {
+            setTimeout(() => {
+                message.delete();
+            }, 2000);
+        }
+        setTimeout(() => {
+            msg.delete();
+        }, 2000);
+    } else {
+        setTimeout(() => {
+            message.delete();
+            msg.delete();
+        }, 2000);
+    }
 };
 
 module.exports.help = {
