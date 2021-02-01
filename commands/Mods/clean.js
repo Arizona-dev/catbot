@@ -34,7 +34,7 @@ module.exports.help = {
     name: "clean",
     aliases: ['clear', 'c'],
     category: 'mods',
-    description: "Clean les messages, entre 1 et 100",
+    description: "Clean les messages de moins de 14 jours, entre 1 et 500",
     cooldown: 0,
     usage: '<nb_message>',
     permissions: true,
