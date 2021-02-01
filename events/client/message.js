@@ -13,22 +13,29 @@ module.exports = (client, message) => {
     if (!command) return;
 
     // Security Permissions
-    if (command.help.permissions && !message.member.hasPermission('ADMINISTRATOR')) { return message.reply('Yo you don\'t have the perms to do that'); }
+    if (command.help.permissions && !message.member.hasPermission('ADMINISTRATOR')) {
+        return message.reply('Cette commande ne te concerne pas.');
+    }
 
+    if (command.help.isMod && !message.member.hasPermission('MANAGE_MESSAGES')) {
+        return message.reply('Cette commande ne te concerne pas.');
+    }
     // Args
     if (command.help.args && !args.length) {
-        let noArgsReply = `This command needs arguments, ${message.author}!`;
+        let noArgsReply = `Cette commande requière des arguments, ${message.author}!`;
 
-        if (command.help.usage) noArgsReply += `\n Here is how to use it: \`${PREFIX}${command.help.name} ${command.help.usage}\``;
+        if (command.help.usage) noArgsReply += `\n Voici comment l'utiliser: \`${PREFIX}${command.help.name} ${command.help.usage}\``;
 
         return message.channel.send(noArgsReply);
     }
 
     // Mention
-    if (command.help.isUserAdmin && !user) { return message.reply('You need to mention a user.'); }
+    if (command.help.isUserAdmin && !user) { return message.reply('Vous devez mentionner un membre.'); }
 
     // Permissions isUserAdmin
-    if (command.help.isUserAdmin && message.guild.member(user).hasPermission('ADMINISTRATOR')) { return message.reply('You cannot use this command on this user.'); }
+    if (command.help.isUserAdmin && message.guild.member(user).hasPermission('ADMINISTRATOR')) {
+        return message.reply('Cet utilisateur est plus haut gradé que vous.');
+    }
 
     // Cooldowns
     if (!client.cooldowns.has(command.help.name)) {
@@ -44,7 +51,7 @@ module.exports = (client, message) => {
 
         if (timeNow < cdExpirationTime) {
             const timeLeft = (cdExpirationTime - timeNow) / 1000;
-            return message.reply(`Hey wait ${timeLeft.toFixed(0)} seconds dude!`);
+            return message.reply(`Attendez ${timeLeft.toFixed(0)} secondes !`);
         }
     }
 

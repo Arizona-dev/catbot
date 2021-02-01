@@ -1,44 +1,44 @@
 {
     "1": {
-        "question": "Cat or dog ?",
+        "question": "Les chats ou les chiens ?",
         "answers": [
-            10,
-            7
+            20,
+            14
         ]
     },
     "2": {
-        "question": "Banana or peach ?",
+        "question": "Banane ou pêche ?",
         "answers": [
-            0,
-            0
+            3,
+            3
         ]
     },
     "3": {
-        "question": "Mac or Windows ?",
+        "question": "Mac ou Windows ?",
         "answers": [
-            0,
-            0
+            5,
+            4
         ]
     },
     "4": {
-        "question": "Paris or NYC ?",
+        "question": "Paris ou NYC ?",
         "answers": [
-            0,
-            0
+            3,
+            3
         ]
     },
     "5": {
-        "question": "Beach or mountain ?",
+        "question": "La plage ou la montagne ?",
         "answers": [
-            0,
-            0
+            4,
+            5
         ]
     },
     "6": {
-        "question": "Coca or Ice tea ?",
+        "question": "Coca ou Ice tea ?",
         "answers": [
-            0,
-            0
+            4,
+            4
         ]
     }
 }

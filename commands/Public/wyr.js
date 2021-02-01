@@ -5,35 +5,34 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports.run = async (client, message) => {
-    var max = Object.keys(JSON).length;
-    var number = Math.floor(Math.random() * Math.floor(max)) + 1;
+    var max = Object.keys(Questions).length;
+    var number = Math.floor(Math.random() * max) + 1;
 
     let rawdata = fs.readFileSync(path.resolve('./', 'questions.json'));
     let question = JSON.parse(rawdata);
 
     const embed = new Discord.MessageEmbed()
             .setColor("#1E90FF")
-            .addField("Would you rather", `${Questions[number].question}`);
+            .addField("Est-ce que tu préfères :", `${Questions[number].question}`);
 
     message.channel.send(embed)
     .then(async (msg) => {
         for (emoji of ['🅰', '🅱']) await msg.react(emoji);
         msg.awaitReactions((reaction) => (reaction.emoji.name == "🅰" || reaction.emoji.name == "🅱"),
-            { max: 1, time: 10000, errors: ['time'] })
+            { max: 20, time: 4000 })
         .then(collected => {
             let A = Questions[number].answers[0];
             let B = Questions[number].answers[1];
-            if (collected.first().emoji.name == '🅰') {
-                question[number].answers[0]++;
-                A = A+1;
-            } else {
-                question[number].answers[1]++;
-                B = B+1;
-            }
+            question[number].answers[0]++;
+            A = A+collected.first().count-1;
+            question[number].answers[1]++;
+            B = B+collected.last().count-1;
             fs.writeFileSync(path.resolve('./', 'questions.json'), JSON.stringify(question, null, 4));
-            message.reply(`${A} voted 🅰 and ${B} voted 🅱`);
+            if (collected.first().id === collected.last().id)
+            message.channel.send(`${(collected.first().count > 1 ? collected.first().count : 0)} votes pour 🅰 | ${A} ont déja voté 🅰 \n${(collected.last().count > 1 ? collected.last().count : 0)} votes pour 🅱 | ${B} ont déja voté 🅱`);
         })
-        .catch(() => {
+        .catch((err) => {
+            console.log(err);
             return message.reply("Pas de réponse, Question annulé");
         })
     })

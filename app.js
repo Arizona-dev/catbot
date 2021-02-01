@@ -10,5 +10,5 @@ loadBot(client);
 // Discord bot client loading
 client.login(process.env.TOKEN)
 client.on('ready', function () {
-    console.log("Je suis connecté !");
-  })
+  console.log("Je suis connecté !");
+})

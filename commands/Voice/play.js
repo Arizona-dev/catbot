@@ -1,79 +1,133 @@
-const Commando = require('discord.js-commando');
-const path = require('path');
+const { PREFIX } = require("../../config.js");
+const ytdl = require("ytdl-core");
+const YouTube = require("discord-youtube-api");
+const youtube = new YouTube("AIzaSyCMev-yhKEx4MKIYPGFe-1Z_rmtvm_Vv-U");
 
 module.exports.run = async (client, message, args) => {
-  const play = new PlayAudioCommand(client);
-  play.run(message, args);
-}
 
-class PlayAudioCommand extends Commando.Command {
-  constructor(client) {
-    super(client, {
-      name: 'play',
-      group: 'voice',
-      memberName: 'play',
-      description: 'Plays some audio',
-    });
+  client.queue = new Map();
+
+  let queue = client.queue;
+
+  if (message.author.bot) return;
+
+  const serverQueue = queue.get(message.guild.id);
+
+  if (message.content.startsWith(`${PREFIX}play`)) {
+    execute(message, serverQueue);
+    return;
+  } else if (args[1] === 'skip') {
+    skip(message, serverQueue);
+    return;
+  } else if (args[1] === 'skip') {
+    stop(message, serverQueue);
+    return;
+  } else {
+    message.channel.send("Commande invalide !");
   }
 
-  async run(message, args) {
-    const directory = __dirname + '/../../public/sounds/';
-    const { voice } = message.member;
+  async function execute(message, serverQueue) {
 
-    if (!voice.channelID) {
-      message.reply('You must be in a voice channel')
-      return
+    const args = message.content.split(" ");
+
+    const voiceChannel = message.member.voice.channel;
+    if (!voiceChannel) {
+      return message.channel.send(
+        "Vous devez être dans un channel vocal !"
+      );
+    }
+    const permissions = voiceChannel.permissionsFor(message.client.user);
+    if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
+      return message.channel.send(
+        "Je n'ai pas les permissions de rejoindre un vocal ou de parler !"
+      );
     }
 
-    if (args[0] === 'ntm') {
-      voice.channel.join().then((connection) => {
-        connection.play(path.join(directory, 'niquetamere.mp3'));
-      });
-    } else if (args[0] === 'zebi') {
-      voice.channel.join().then((connection) => {
-        connection.play(path.join(directory, 'laissemoidormirzebi.mp3'));
-      });
-    } else if (args[0] === 'respect') {
-      voice.channel.join().then((connection) => {
-        connection.play(path.join(directory, 'respectmongarcon.mp3'));
-      });
-    } else if (args[0] === 'ps4') {
-      voice.channel.join().then((connection) => {
-        connection.play(path.join(directory, 'pourquoi-ta-eteint-la-play.mp3'));
-      });
-    } else if (args[0] === 'kouisine') {
-      voice.channel.join().then((connection) => {
-        connection.play(path.join(directory, 'kouisine.mp3'));
-      });
-    } else if (args[0] === 'humiliation') {
-      voice.channel.join().then((connection) => {
-        connection.play(path.join(directory, 'humiliation.mp3'));
-      });
-    } else if (args[0] === 'frappe') {
-      voice.channel.join().then((connection) => {
-        connection.play(path.join(directory, 'frappemoi.mp3'));
-      });
-    } else if (args[0] === 'soucis') {
-      voice.channel.join().then((connection) => {
-        connection.play(path.join(directory, 'soucis.mp3'));
-      });
-    } else if (args[0] === 'ok') {
-      voice.channel.join().then((connection) => {
-        connection.play(path.join(directory, 'okay.mp3'));
-      });
-    } else if (args[0] === 'front') {
-      voice.channel.join().then((connection) => {
-        connection.play(path.join(directory, 'sensibilite.mp3'));
-      });
+    music = await youtube.searchVideos(args[1]);
+    
+    const songInfo = await ytdl.getInfo(music.id);
+    const song = {
+      title: songInfo.videoDetails.title,
+      url: songInfo.videoDetails.video_url,
+    };
+
+    if (!serverQueue) {
+      const queueContruct = {
+        textChannel: message.channel,
+        voiceChannel: voiceChannel,
+        connection: null,
+        songs: [],
+        volume: 5,
+        playing: true
+      };
+
+      queue.set(message.guild.id, queueContruct);
+
+      queueContruct.songs.push(song);
+
+      try {
+        var connection = await voiceChannel.join();
+        queueContruct.connection = connection;
+        play(message.guild, queueContruct.songs[0]);
+      } catch (err) {
+        console.log(err);
+        queue.delete(message.guild.id);
+        return message.channel.send(err);
+      }
     } else {
-      message.reply('zebi - kouisine - ps4 - ntm - humiliation - respect- frappe - soucis - ok - front');
+      serverQueue.songs.push(song);
+      return message.channel.send(`${song.title} à été ajouté à la playlist !`);
     }
+  }
+
+  function skip(message, serverQueue) {
+    if (!message.member.voice.channel)
+      return message.channel.send(
+        "Vous devez être dans un channel vocal !"
+      );
+    if (!serverQueue)
+      return message.channel.send("Aucune musique en cours de lecture !");
+    serverQueue.connection.dispatcher.end();
+  }
+
+  function stop(message, serverQueue) {
+    if (!message.member.voice.channel)
+      return message.channel.send(
+        "Vous devez être dans un channel vocal !"
+      );
+      
+    if (!serverQueue)
+      return message.channel.send("Aucune musique dans la playlist !");
+      
+    serverQueue.songs = [];
+    serverQueue.connection.dispatcher.end();
+  }
+
+  function play(guild, song) {
+    const serverQueue = queue.get(guild.id);
+    if (!song) {
+      setTimeout(() => {
+        serverQueue.voiceChannel.leave();
+      }, 30000);
+      queue.delete(guild.id);
+      return;
+    }
+
+    const dispatcher = serverQueue.connection
+      .play(ytdl(song.url))
+      .on("finish", () => {
+        serverQueue.songs.shift();
+        play(guild, serverQueue.songs[0]);
+      })
+      .on("error", error => console.error(error));
+    dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+    serverQueue.textChannel.send(`Lecture en cours: **${song.title}**`);
   }
 }
 
 module.exports.help = {
   name: "play",  // nom du fichier
-  aliases: ['sound'], // alias ou nom du fichier si pas d'alias
+  aliases: ['m'], // alias ou nom du fichier si pas d'alias
   category: 'voice', // nom du dossier 
   description: "Jouez de la musique", // une description
   cooldown: 0, // un cd entre 2 fois la meme commande

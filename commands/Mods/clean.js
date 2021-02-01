@@ -1,6 +1,6 @@
 module.exports.run = async (client, message, args) => {
     if (isNaN(args[0]) || args[0] < 1 || args[0] > 500)
-        return message.reply('Entrer un nombre entre 1 and 500');
+        return message.reply('Entrez un nombre entre 1 and 500');
 
     const toDelete = (args[0] <= 100 ? args[0] : args[0] / 100);
     const messages = await message.channel.messages.fetch({
@@ -37,7 +37,8 @@ module.exports.help = {
     description: "Clean les messages de moins de 14 jours, entre 1 et 500",
     cooldown: 0,
     usage: '<nb_message>',
-    permissions: true,
+    permissions: false,
+    isMod: true,
     isUserAdmin: false,
     args: true
 };
