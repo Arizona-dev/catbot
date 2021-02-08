@@ -1,14 +1,14 @@
 const mongo = require('../../mongo');
-const verificationSchema = require('../../schemas/verificationChannelsSchema');
 
 // { 'channelId': 'roleId' }
 let verificationCache = {}
 
 const fetchData = async (client) => {
+  const { verificationChannel } = client.app.models;
 
   await mongo().then(async (mongoose) => {
     try {
-      const results = await verificationSchema.find({})
+      const results = await verificationChannel.find({})
 
       for (const result of results) {
         const guild = client.guilds.cache.get(result._id)
@@ -29,9 +29,9 @@ const fetchData = async (client) => {
 const populateCache = async (client) => {
   verificationCache = {}
 
-  await fetchData(client)
+  // await fetchData(client);
 
-  setTimeout(populateCache, 1000 * 60 * 10) // 10m
+  // setTimeout(populateCache, 1000 * 60 * 10) // 10m
 }
 
 module.exports = (client) => {

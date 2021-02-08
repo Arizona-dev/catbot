@@ -1,0 +1,94 @@
+{
+  "type": "object",
+  "properties": {
+    "host": {
+      "type": "string",
+      "description": "API URL",
+      "default": "http://localhost"
+    },
+    "application": {
+      "type": "string",
+      "description": "Lien vers l'application"
+    },
+    "port": {
+      "type": "string",
+      "description": "API port",
+      "default": "6900"
+    },
+    "cors": {
+      "type": "object",
+      "properties": {
+        "origin": {
+          "type": "string",
+          "description": "Access-Control-Allow-Origin header",
+          "default": "*"
+        }
+      }
+    },
+    "auth": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "object",
+          "properties": {
+            "salt": {
+              "type": "string",
+              "description": "JWT token key"
+            },
+            "lifeTime": {
+              "type": "string",
+              "description": "JWT token lifetime",
+              "default": "30days"
+            }
+          }
+        },
+        "refreshToken": {
+          "type": "object",
+          "properties": {
+            "expiration": {
+              "type": "string",
+              "description": "Refresh token lifetime"
+            },
+            "saltRounds": {
+              "type": "number",
+              "description": "Count of salt rounds"
+            }
+          },
+          "required": [
+            "expiration",
+            "saltRounds"
+          ]
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "saltRounds": {
+              "type": "number",
+              "description": "Count of salt rounds"
+            }
+          },
+          "required": [
+            "saltRounds"
+          ]
+        },
+        "required": [
+          "token",
+          "refresToken",
+          "user"
+        ]
+      }
+    },
+    "maxBodySize": {
+      "type": "string",
+      "description": "Max body size for user logos (as base 64)",
+      "default": "2mb"
+    }
+  },
+  "required": [ 
+    "host",
+    "port",
+    "cors",
+    "auth",
+    "maxBodySize"
+   ] 
+}

@@ -1,0 +1,21 @@
+{
+  "host": "localhost",
+  "port": "6970",
+  "cors": {
+    "origin": "*"
+  },
+  "auth": {
+    "token": {
+      "salt": "R5ndmSp4eiRs7df4k",
+      "lifeTime": "30days"
+    },
+    "refreshToken": {
+      "expiration": "30days",
+      "saltRounds": 13
+    },
+    "users": {
+      "saltRounds": 13
+    }
+  },
+  "maxBodySize": "2mb"
+}

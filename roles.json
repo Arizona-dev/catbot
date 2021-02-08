@@ -1,0 +1,35 @@
+[
+  {
+    "807217203367510016": {
+      "removable": true,
+      "emojis": [{
+          "id": "id_emoji",
+          "roles": "role_reaction"
+      }, {
+          "id": "id_emoji",
+          "roles": "role_reaction"
+      }, {
+          "id": "id_emoji",
+          "roles": "role_reaction"
+      }, {
+          "id": "id_emoji",
+          "roles": "role_reaction"
+      }, {
+          "id": "id_emoji",
+          "roles": "role_reaction"
+      }, {
+          "id": "id_emoji",
+          "roles": "role_reaction"
+      }, {
+          "id": "id_emoji",
+          "roles": "role_reaction"
+      }, {
+          "id": "id_emoji",
+          "roles": "role_reaction"
+      }, {
+          "id": "id_emoji",
+          "roles": "role_reaction"
+      }]
+    }
+  }
+]

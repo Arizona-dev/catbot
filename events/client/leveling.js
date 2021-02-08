@@ -1,14 +1,14 @@
 const mongo = require('../../mongo');
-const profileSchema = require('../../schemas/profileSchema');
 
 module.exports = (client) => {
+  const { profiles } = client.app.models;
   client.on('message', (message) => {
     const { guild, member } = message;
     if (member && member.user && member.user.bot) {
       return
     }
     if (member && member.user) {
-      addXP(guild.id, member.id, Math.random() * 3, message);
+      addXP(guild.id, member.id, Math.random() * 3, message, profiles);
     } else {
       return
     }
@@ -17,10 +17,10 @@ module.exports = (client) => {
 
 const getNeededXP = (level) => level * level * 100;
 
-const addXP = async (guildId, userId, xpToAdd, message) => {
+const addXP = async (guildId, userId, xpToAdd, message, profiles) => {
   await mongo().then(async (mongoose) => {
     try {
-      const result = await profileSchema.findOneAndUpdate(
+      const result = await profiles.findOneAndUpdate(
         {
           guildId,
           userId,
@@ -49,7 +49,7 @@ const addXP = async (guildId, userId, xpToAdd, message) => {
           `Vous avez atteint le niveau ${level} ! Il vous manque ${getNeededXP(level)} XP avant le prochain niveau.`
         );
 
-        await profileSchema.updateOne(
+        await profiles.updateOne(
           {
             guildId,
             userId,
@@ -60,6 +60,8 @@ const addXP = async (guildId, userId, xpToAdd, message) => {
           }
         )
       }
+    } catch (err) {
+      console.log(err);
     } finally {
       mongoose.connection.close();
     }

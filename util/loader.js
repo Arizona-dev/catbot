@@ -30,7 +30,6 @@ const loadBot = (client) => {
         logs(`${dirs}: ${events.length} évenement(s) chargés`);
         console.log(`${dirs}: ${events.length} évenement(s) chargés`);
     })
-
 }
 
 module.exports = {

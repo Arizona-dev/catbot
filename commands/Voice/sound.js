@@ -1,6 +1,5 @@
 const Commando = require('discord.js-commando');
 const path = require('path');
-const ytdl = require("ytdl-core");
 
 module.exports.run = async (client, message, args) => {
   const play = new PlayAudioCommand(client);
