@@ -16,14 +16,13 @@ module.exports.run = async (client, message, args) => {
     } else {
         user = user.split("@")[1].split(">")[0];
     }
-    const banUser = message.member.user.username;
-
+    console.log(message.mentions.users.first());
     const banEmbed = new Discord.MessageEmbed()
 	.setColor('#FF0000')
-	.setTitle('CatBot')
-	.setDescription('Le marteau du président de la cour a frappé !')
-	.setThumbnail('https://i.pinimg.com/originals/8d/83/4e/8d834eb571cdfe4abfeebf72e15e7ea3.jpg')
-	.addField(`À la barre : ${banUser} (${user})`, `L\'accusé est déclaré coupable pour : \n -${reason} \n\n Et se voit recevoir la décision de la cour qui est un Bannissement définitif ! \nLa sentence est irrévocable !`, true)
+	.setTitle('Delamain')
+    .setDescription('Le marteau du président de la cour a frappé !')
+    .setThumbnail(`${message.mentions.users.first().avatarURL()}`)
+	.addField(`À la barre : ${message.mentions.users.first().tag} (${user})`, `L\'accusé est déclaré coupable pour : \n -${reason} \n\n Et se voit recevoir la décision de la cour qui est un Bannissement définitif ! \nLa sentence est irrévocable !`, true)
 	.setImage('https://media1.tenor.com/images/d856e0e0055af0d726ed9e472a3e9737/tenor.gif?itemid=8540509')
 	.setTimestamp()
     .setFooter('La session est terminée.');

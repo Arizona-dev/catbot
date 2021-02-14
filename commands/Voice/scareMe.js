@@ -149,7 +149,7 @@ module.exports.help = {
   description: "Jouez un son youtube chez ZhenZhen, fait pas le fdp", // une description
   cooldown: 60, // un cd entre 2 fois la meme commande
   usage: '<command_name>', // si y a des arguments obligatoire
-  permissions: false, // permissions de la personne qui fait la commande
+  permissions: true, // permissions de la personne qui fait la commande
   isUserAdmin: false, // args doit etre une mention et la personne mentionné n'est pas administrator
   args: false // besoin d'args
 };

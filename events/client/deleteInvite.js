@@ -8,6 +8,13 @@ module.exports = (client, user) => {
           if (message.author.id === message.guild.ownerID) return;
           await message.delete();
           await message.channel.send(`**Nique ta mère**`);
+          const embed = new Discord.MessageEmbed()
+            .setTitle(`Un lien d'invitation à été publié`)
+            .setColor("#1E90FF")
+            .addField("Auteur", message.author.username)
+            .addField("Ancien message", message)
+
+          channel.send(embed);
         }
       } catch (e) {
         console.log(e);
@@ -22,6 +29,13 @@ module.exports = (client, user) => {
           if (message.author.id === message.guild.ownerID) return;
           await message.delete();
           await message.channel.send(`**Nique ta mère**`);
+          const embed = new Discord.MessageEmbed()
+            .setTitle(`Un lien d'invitation à été publié`)
+            .setColor("#1E90FF")
+            .addField("Auteur", message.author.username)
+            .addField("Ancien message", message)
+
+          channel.send(embed);
         }
       } catch (e) {
         console.log(e);

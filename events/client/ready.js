@@ -9,7 +9,6 @@ const lightMention = require("./lightMention");
 const roles = require("./roles");
 
 module.exports = (client) => {
-    client.user.setPresence({ activity: { name: 'toutes vos requêtes', type: 'LISTENING' } });
 
     memberCount(client);
     roleClaim(client);

@@ -15,9 +15,9 @@ module.exports.run = async (client, message, args) => {
     setTimeout(() => {
       message.guild.channels.cache.forEach(async (channel, id) => {
         await channel.updateOverwrite(memberRole, {
-          SEND_MESSAGES: true,
-          ADD_REACTIONS: true,
-          CONNECT: true
+          SEND_MESSAGES: null,
+          ADD_REACTIONS: null,
+          CONNECT: null
         });
       });
     }, ms(muteTime));

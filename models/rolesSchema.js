@@ -7,17 +7,16 @@ module.exports = (app) => {
   }
 
   const rolesSchema = mongoose.Schema({
-    guildId: reqString,
-    messageId: reqString,
-    removable: {
-      type: Boolean,
-      default: true
+    guild_id: reqString,
+    message_id: reqString,
+    title: {
+      type: String
     },
     emojis: [{
-      id: {
+      emoji_id: {
         type: String,
       },
-      role: {
+      role_id: {
         type: String,
       }
     }]

@@ -11,9 +11,9 @@ module.exports = (client, user) => {
             .setTitle(`Et la lumière fut <:sueur:799633182147215401>`)
             .setColor("#1E90FF")
           const msg = await message.channel.send(embed);
-          // setTimeout(() => {
-          //   msg.delete();
-          // }, 5000);
+          setTimeout(() => {
+            msg.delete();
+          }, 5000);
         }
       } catch (e) {
         console.log(e);
@@ -32,9 +32,9 @@ function serialListener() {
 	Serialport.on("open", function () {
 	  console.log('Serial COM connecté');
   });
-  Serialport.on("data", function (data) {
-    console.log('data :', data);
-  });
+  // Serialport.on("data", function (data) {
+  //   console.log('data :', data);
+  // });
 }
 
 function turnLedOn() {

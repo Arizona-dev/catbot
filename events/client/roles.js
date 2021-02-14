@@ -3,28 +3,67 @@ const fs = require('fs');
 const path = require('path');
 const rolesData = require('../../roles.json');
 const mongo = require('../../mongo');
+const Discord = require("discord.js");
 
 module.exports = (client) => {
-  const { roles } = client.app.models;
   // const channelId = '796844120768774154'
   // Setting data from website
   // const guildId = message.guild.id;
   // const channelId = '807217203367510016';
 
-  let guildId = '753700110864482395';
-  let channelId = '808085474785755208';
+  let guildId;
+  let channelId;
   let messageId;
 
-  client.on('message', async (message) => {
-      if (!message.author.bot) {
-        if (message.member.hasPermission('ADMINISTRATOR')) {
-          if (message.content === '*setupRoles') {
-            addRoles(message.guild.id, channelId);
-          }
-        }
-      }
+  // client.on('message', async (message) => {
+  //     if (!message.author.bot) {
+  //       if (message.member.hasPermission('ADMINISTRATOR')) {
+  //         if (message.content === '*setupRoles') {
+            
+  //           const embed = new Discord.MessageEmbed()
+  //             .setTitle(`Rôles`)
+  //             .setColor("#1E90FF")
+  //             .addField("Configuration", `Ecrivez maintenant *updateRole suivi des arguments ci-dessous dans l'ordre.`)
+  //             .addField("Id du message", `Copiez collez l'identifiant de mon message`)
+  //             .addField("Nom du message", `Entrez le titre du message`)
+  //             .addField("Description", `Entrez la description du message`)
+
+  //           message.channel.send(embed);
+  //           console.log(embed);
+  //         } else if (message.content.startsWith('*updateRole')) {
+  //           // const roles = updateRole(message.guild.id);
+  //           const message_name = 'test'
+  //           const roles = createRoles(message.guild.id, message.id, message_name);
+  //         }
+  //       }
+  //     }
+  //   });
+  
+
+
+  async function createRoles(guild_id, message_id, message_name) {
+    const { roles } = client.app.models;
+
+    const messages_roles = roles.create({
+      guild_id,
+      message_id,
+      name: message_name
+    }, (err, result) => {
+      if (err) return console.log(err);
+      return result;
     })
+    console.log(messages_roles);
+    // await roles.create([
+    //   {
+    //     guild_id: 'Jean-Luc Picard',
+    //     age: 59, rank: 'Captain' },
+    // ]);
+
+    return result;
   }
+}
+
+
   // const getEmoji = (emojiName) =>
   //   client.emojis.cache.find((emoji) => emoji.name === emojiName);
 
@@ -33,11 +72,7 @@ module.exports = (client) => {
 
   //   }
   // }
-  loadRoles();
-  function loadRoles() {
-    const rolesList = JSON.parse(fs.readFileSync(path.resolve('./', 'roles.json')));
-    return rolesList;
-  }
+  
 
   // fs.writeFileSync(path.resolve('./', 'questions.json'), JSON.stringify(question, null, 4));
 
@@ -90,7 +125,7 @@ module.exports = (client) => {
   //   }
   // })
 
-const addRoles = async (guildId, channelId) => {
+const addRoles = async (message) => {
   await mongo().then(async (mongoose) => {
 
     try {

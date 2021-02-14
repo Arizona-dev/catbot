@@ -22,7 +22,7 @@ class BotInfoCommand extends Commando.Command {
     let totalMembers = 0
 
     for (const guild of this.client.guilds.cache) {
-      totalMembers += (await guild[1].members.fetch()).size
+      totalMembers += (await guild[1].members.fetch()).size;
     }
 
     const embed = new MessageEmbed()
