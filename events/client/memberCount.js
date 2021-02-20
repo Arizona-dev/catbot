@@ -56,10 +56,12 @@ module.exports = (client) => {
     welcomeChannel.map((channel) => {
       const found = guild.channels.cache.get(channel);
       if (found) {
+        console.log(member);
         const embed = new MessageEmbed()
-          .setAuthor(`${member.displayName} (${member.id})`, member.user.displayAvatarURL())
+          .setThumbnail(member.user.displayAvatarURL())
           .setColor("BLUE")
-          .setFooter(`${member.displayName} nous à rejoints !`)
+          .addField(`Sortez le Champagne`, `<@${member.id}> nous à rejoint !`)
+          .setFooter(`${member.id}`)
           .setTimestamp();
         client.channels.cache.get(found.id).send(embed);
       }
@@ -71,10 +73,12 @@ module.exports = (client) => {
     welcomeChannel.map((channel) => {
       const found = guild.channels.cache.get(channel);
       if (found) {
+        console.log(member.user.tag);
         const embed = new MessageEmbed()
-          .setAuthor(`${member.displayName} (${member.id})`, member.user.displayAvatarURL())
+          .setThumbnail(member.user.displayAvatarURL())
           .setColor("RED")
-          .setFooter(`${member.displayName} viens de nous quitter :(`)
+          .addField(`Aurevoir`, `<@${member.id}> viens de nous quitter.`)
+          .setFooter(`${member.id}`)
           .setTimestamp();
         client.channels.cache.get(found.id).send(embed);
       }

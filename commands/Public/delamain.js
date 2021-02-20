@@ -27,33 +27,34 @@ class BotInfoCommand extends Commando.Command {
 
     const embed = new MessageEmbed()
       .setAuthor(
-        `Information à propos de ${this.client.user.username}`,
+        `A propos de ${this.client.user.username}`,
         this.client.user.displayAvatarURL()
       )
       .addFields(
         {
-          name: 'Bot tag :',
-          value: this.client.user.tag,
+          name: 'Créateur',
+          value: `<@230920595204866050>`,
+          inline: true
         },
         {
-          name: 'Version :',
+          name: 'Version',
           value: version,
+          inline: true
         },
         {
-          name: "Prefix des commandes :",
+          name: "Prefix",
           value: PREFIX,
+          inline: true
         },
         {
-          name: 'Temps depuis le dernier reboot :',
-          value: `${process.uptime().toFixed(2)}s`,
+          name: 'A disposition sur',
+          value: `${this.client.guilds.cache.size} serveurs`,
+          inline: true
         },
         {
-          name: 'Nombre de clients :',
-          value: this.client.guilds.cache.size,
-        },
-        {
-          name: 'Nombre total de membres :',
-          value: totalMembers,
+          name: "A l'écoute de",
+          value: `${totalMembers} membres`,
+          inline: true
         }
       );
 
