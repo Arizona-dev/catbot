@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 module.exports = (client, user) => {
   client.on(`message`, async message => {
-    if (!message.author.bot && message.channel.id !== '798645245981491230') {
+    if (!message.author.bot && message.channel.id !== '815907332780195860') {
       const bannedWords = [`discord.gg`, `.gg/`, `.gg /`, `. gg /`, `. gg/`, `discord .gg /`, `discord.gg /`, `discord .gg/`, `discord .gg`, `discord . gg`, `discord. gg`, `discord gg`, `discordgg`, `discord gg /`]
       try {
         if (bannedWords.some(word => message.content.toLowerCase().includes(word))) {
@@ -11,10 +11,10 @@ module.exports = (client, user) => {
           const embed = new Discord.MessageEmbed()
             .setTitle(`Un lien d'invitation à été publié`)
             .setColor("#1E90FF")
-            .addField("Auteur", message.author.username)
-            .addField("Ancien message", message)
+            .addField("Auteur", message.author.username, true)
+            // .addField("Message", message, true)
 
-          channel.send(embed);
+            message.channel.send(embed);
         }
       } catch (e) {
         console.log(e);
@@ -22,7 +22,7 @@ module.exports = (client, user) => {
     }
   });
   client.on(`messageUpdate`, async message => {
-    if (!message.author.bot && message.channel.id !== '798645245981491230') {
+    if (!message.author.bot && message.channel.id !== '815907332780195860') {
       const bannedWords = [`discord.gg`, `.gg/`, `.gg /`, `. gg /`, `. gg/`, `discord .gg /`, `discord.gg /`, `discord .gg/`, `discord .gg`, `discord . gg`, `discord. gg`, `discord gg`, `discordgg`, `discord gg /`]
       try {
         if (bannedWords.some(word => message.reactions.message.content.toLowerCase().includes(word))) {
@@ -32,10 +32,10 @@ module.exports = (client, user) => {
           const embed = new Discord.MessageEmbed()
             .setTitle(`Un lien d'invitation à été publié`)
             .setColor("#1E90FF")
-            .addField("Auteur", message.author.username)
-            .addField("Ancien message", message)
+            .addField("Auteur", message.author.username, true)
+            .addField("Message", message, true)
 
-          channel.send(embed);
+            message.channel.send(embed);
         }
       } catch (e) {
         console.log(e);

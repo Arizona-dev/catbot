@@ -58,14 +58,13 @@ class UserInfoCommand extends Commando.Command {
 };
 
 module.exports.help = {
-    name: "profile",
-    aliases: ['p'],
+    name: "russian-roulette",
+    aliases: ['rr'],
     category: 'public',
-    description: "Voir les informations du membre",
+    description: "Roulette Russe",
     cooldown: 0,
-    usage: "<command_name> @user",
+    usage: "<command_name> @user <nb de balles 1 à 6>",
     permissions: false,
     isUserAdmin: false,
     args: false
-
 };

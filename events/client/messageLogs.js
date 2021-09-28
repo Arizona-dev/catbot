@@ -2,12 +2,8 @@ const Discord = require("discord.js");
 module.exports = (client, user) => {
   const guild_channel_id = [
     {
-      'guild_id': '753700110864482395',
-      'channel_id': '796162819023831121'
-    },
-    {
-      'guild_id': '809037834837032970',
-      'channel_id': '809078759327793164'
+      'guild_id': '821780662155083806',
+      'channel_id': '821886177543323749'
     }
   ];
 
@@ -38,7 +34,7 @@ module.exports = (client, user) => {
           channel.send(embed);
         }
       } catch (e) {
-        console.log(e);
+        console.log('Channel inconnu', e);
       }
     }
   });

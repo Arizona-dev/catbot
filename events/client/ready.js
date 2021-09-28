@@ -4,9 +4,10 @@ const leveling = require("./leveling");
 const verificationChannels = require("./verificationChannels");
 const deleteInvite = require("./deleteInvite");
 const messageLogs = require("./messageLogs");
-const sabrina = require("./sabrina");
+const raid = require("./raid");
 const lightMention = require("./lightMention");
 const roles = require("./roles");
+const inviteLogger = require("./inviteLogger");
 
 module.exports = (client) => {
 
@@ -16,7 +17,8 @@ module.exports = (client) => {
     verificationChannels(client);
     deleteInvite(client);
     messageLogs(client);
-    sabrina(client);
-    lightMention(client);
+    raid(client);
+    // lightMention(client);
     roles(client);
+    inviteLogger(client);
 }

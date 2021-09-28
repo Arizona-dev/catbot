@@ -22,12 +22,8 @@ loadBot(client);
 // Discord bot client loading
 client.login(process.env.TOKEN)
 client.on('ready', function () {
-  console.log("Je suis connecté !");
+  console.log("All systems online.");
 });
 
 
 client.app.boot(client.app.config.port, client.app.config.host);
-
-client.app.get('/', function(req, res) {
-  res.send('hello world');
-});

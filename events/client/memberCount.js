@@ -29,7 +29,12 @@ module.exports = (client) => {
 
   const welcomeChannel = [
     '809041312794804227',
-    '753700110864482397'
+    '753700110864482397',
+    '812706579413336114'
+  ];
+
+  const goodbyeChannel = [
+    '813373873961304094'
   ];
 
   const guilds = client.guilds.cache.map(guild => guild.id);
@@ -54,13 +59,13 @@ module.exports = (client) => {
 
   const sendWelcome = (member, guild) => {
     welcomeChannel.map((channel) => {
+      
       const found = guild.channels.cache.get(channel);
       if (found) {
-        console.log(member);
         const embed = new MessageEmbed()
           .setThumbnail(member.user.displayAvatarURL())
           .setColor("BLUE")
-          .addField(`Sortez le Champagne`, `<@${member.id}> nous à rejoint !`)
+          .addField(`Sortez le Champagne`, `<@${member.id}> nous a rejoint !`)
           .setFooter(`${member.id}`)
           .setTimestamp();
         client.channels.cache.get(found.id).send(embed);
@@ -70,14 +75,13 @@ module.exports = (client) => {
   }
 
   const sendGoodbye = (member, guild) => {
-    welcomeChannel.map((channel) => {
+    goodbyeChannel.map((channel) => {
       const found = guild.channels.cache.get(channel);
       if (found) {
-        console.log(member.user.tag);
         const embed = new MessageEmbed()
           .setThumbnail(member.user.displayAvatarURL())
           .setColor("RED")
-          .addField(`Aurevoir`, `<@${member.id}> viens de nous quitter.`)
+          .addField(`Aurevoir`, `<@${member.id}>, Du balai saupiquet !`)
           .setFooter(`${member.id}`)
           .setTimestamp();
         client.channels.cache.get(found.id).send(embed);

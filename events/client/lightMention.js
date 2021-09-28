@@ -7,13 +7,6 @@ module.exports = (client, user) => {
       try {
         if (message.content.toLowerCase() === 'zenzen' || message.content.toLowerCase() === 'zhenzhen' || ((message.mentions.users.first() ? message.mentions.users.first().id === '230920595204866050' : false))) {
           turnLedOn();
-          const embed = new Discord.MessageEmbed()
-            .setTitle(`Et la lumière fut <:sueur:799633182147215401>`)
-            .setColor("#1E90FF")
-          const msg = await message.channel.send(embed);
-          setTimeout(() => {
-            msg.delete();
-          }, 5000);
         }
       } catch (e) {
         console.log(e);
@@ -42,6 +35,5 @@ function turnLedOn() {
     if (err) {
       return console.log(err);
     }
-    console.log('sent');
   })
 }

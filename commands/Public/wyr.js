@@ -29,7 +29,7 @@ module.exports.run = async (client, message) => {
             B = B+collected.last().count-1;
             fs.writeFileSync(path.resolve('./', 'questions.json'), JSON.stringify(question, null, 4));
             if (collected.first().id === collected.last().id)
-            message.channel.send(`${(collected.first().count > 1 ? collected.first().count : 0)} votes pour 🅰 | ${A} ont déja voté 🅰 \n${(collected.last().count > 1 ? collected.last().count : 0)} votes pour 🅱 | ${B} ont déja voté 🅱`);
+            message.channel.send(`${(collected.first().count > 1 ? collected.first().count : 0)} votes pour 🅰 | ${A} ont précédemment voté 🅰 \n${(collected.last().count > 1 ? collected.last().count : 0)} votes pour 🅱 | ${B} ont précédemment voté 🅱`);
         })
         .catch((err) => {
             console.log(err);

@@ -1,3 +1,4 @@
+const Discord = require("discord.js");
 const addReactions = (message, reactions) => {
     message.react(reactions[0]);
     reactions.shift();
@@ -10,7 +11,7 @@ module.exports = async (client, id, text, reactions = []) => {
     const channel = await client.channels.fetch(id);
 
     try {
-        channel.messages.fetch().then((messages) => {
+        channel.messages.fetch({ limit: 1 }).then((messages) => {
             if (messages.size === 0) {
                 // Send new message
                 channel.send(text).then((message) => {
@@ -18,10 +19,27 @@ module.exports = async (client, id, text, reactions = []) => {
                 });
             } else {
                 // Edit the messages
-                for (const message of messages) {
-                    message[1].edit(text);
-                    addReactions(message[1], reactions);
-                }
+                channel.messages.fetch({ limit: 1 }).then(messages => {
+                    let lastMessage = messages.first();
+                    
+                    if (!lastMessage.author.bot && lastMessage.author.id !== id) {
+                        const embed = new Discord.MessageEmbed()
+                        .setTitle(`Choisi tes roles`)
+                        .setColor("#1E90FF")
+
+                        channel.send(embed);
+                        for (const message of messages) {
+                            message[1].edit(text);
+                            addReactions(message[1], reactions);
+                        }
+                    } else {
+                        for (const message of messages) {
+                            message[1].edit(text);
+                            addReactions(message[1], reactions);
+                        }
+                    }
+                  })
+                  .catch(console.error);
             }
         });
     } catch (error) {

@@ -1,35 +1,30 @@
 const roles_1 = require('./Messages/roles_1');
 
 module.exports = (client) => {
-  const channelId = '796844120768774154'
+  const channelId = '821886177543323749'
 
   const getEmoji = (emojiName) =>
     client.emojis.cache.find((emoji) => emoji.name === emojiName);
 
   const emojis = {
-    cp_girl: 'Femme',
-    keanu: 'Homme',
-    DiscordThink: 'Autre',
-    PandaProfit: 'Salarié',
-    blobstudent: 'Student',
-    javascript: 'Javascript',
-    net: 'C# .NET',
-    php: 'PHP',
-    python: 'Python',
+    nani: '1',
+    nya: '2',
+    run: '3',
   }
 
   const reactions = []
 
-  let emojiText = '```Réagissez aux réactions qui vous correspondent pour reçevoir le rôle associé.```\n';
+  let emojiText = '```Réagissez aux réactions qui vous correspondent pour recevoir le rôle associé.```\n';
   for (const key in emojis) {
     const emoji = getEmoji(key)
     reactions.push(emoji)
 
     const role = emojis[key]
-    emojiText += `${emoji} = ${role}\n`
+    emojiText += `${emoji} = ${role}\n\n`
   }
+  emojiText += `_ _`
 
-  roles_1(client, channelId, emojiText, reactions)
+  roles_1(client, channelId, emojiText, reactions);
 
   const handleReaction = (reaction, user, add) => {
     if (user.id === '769273143016816700') {
