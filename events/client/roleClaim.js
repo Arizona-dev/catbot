@@ -1,15 +1,17 @@
 const roles_1 = require('./Messages/roles_1');
 
 module.exports = (client) => {
-  const channelId = '821886177543323749'
+  const channelId = '892394268138831882'
 
   const getEmoji = (emojiName) =>
     client.emojis.cache.find((emoji) => emoji.name === emojiName);
 
   const emojis = {
-    nani: '1',
-    nya: '2',
-    run: '3',
+    zero_pixel: '!-IW',
+    one_pixel: '4IW1',
+    two_pixel: '4IW2',
+    three_pixel: '4IW3',
+    four_pixel: '4IW4',
   }
 
   const reactions = []
